@@ -14,11 +14,11 @@
     <div class="col-12 col-lg-2"></div>
     <div class="col-12 col-lg-10">
       {% if previous_adventure_id %}
-        <a href='/trips/{{trip_id}}/adventures/{{previous_adventure_id}}'><< Previous day</a> |
+        <a href='/trips/{{trip_id}}/adventures/{{previous_adventure_id}}'><< Previous</a> |
       {% endif %}
-      <a href='../../../trips/{{trip_id}}'>Back to {{trip['name']}}</a>
+      <a href='../../../trips/{{trip_id}}'>Contents</a>
       {% if next_adventure_id %}
-        | <a href='/trips/{{trip_id}}/adventures/{{next_adventure_id}}'>Next day >></a>
+        | <a href='/trips/{{trip_id}}/adventures/{{next_adventure_id}}'>Next >></a>
       {% endif %}
     </div>
   </div>
@@ -101,11 +101,11 @@
     <div class="col-12 col-lg-2"></div>
     <div class="col-12 col-lg-10">
       {% if previous_adventure_id %}
-        <a href='/trips/{{trip_id}}/adventures/{{previous_adventure_id}}'><< Previous day</a> |
+        <a href='/trips/{{trip_id}}/adventures/{{previous_adventure_id}}'><< Previous</a> |
       {% endif %}
-      <a href='../../../trips/{{trip_id}}'>Back to {{trip['name']}}</a>
+      <a href='../../../trips/{{trip_id}}'>Contents</a>
       {% if next_adventure_id %}
-        | <a href='/trips/{{trip_id}}/adventures/{{next_adventure_id}}'>Next day >></a>
+        | <a href='/trips/{{trip_id}}/adventures/{{next_adventure_id}}'>Next >></a>
       {% endif %}
     </div>
   </div>
