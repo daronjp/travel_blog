@@ -330,7 +330,7 @@ def edit_location_form(id_, ida_, idl_):
             location.visit_time=visit_time
             location.summary=summary
             db.session.commit()
-            return "Location modified. location id={}".format(location.id)
+            return redirect(f'/trips/{id_}/adventures/{ida_}')
         except Exception as e:
             return(str(e))
     else:
