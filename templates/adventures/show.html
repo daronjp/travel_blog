@@ -97,6 +97,18 @@
       <div class="col-12 col-lg-2"></div>
     </div>
 {% endfor %}
+  <div class="row my-2">
+    <div class="col-12 col-lg-2"></div>
+    <div class="col-12 col-lg-10">
+      {% if previous_adventure_id %}
+        <a href='/trips/{{trip_id}}/adventures/{{previous_adventure_id}}'><< Previous day</a> |
+      {% endif %}
+      <a href='../../../trips/{{trip_id}}'>Back to {{trip['name']}}</a>
+      {% if next_adventure_id %}
+        | <a href='/trips/{{trip_id}}/adventures/{{next_adventure_id}}'>Next day >></a>
+      {% endif %}
+    </div>
+  </div>
 </div>
 </body>
 </html>
