@@ -13,9 +13,14 @@
   <div class="container">
     <div class="row">
       <div class="col-8">
-          <h2>{{trip['name']}}</h2>
+          <h1>{{trip['name']}}</h1>
       </div>
       <div class="col-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <a href="/trips">Home</a>
+      </div>
     </div>
     {% if current_user.is_authenticated %}
       <div class="row">
