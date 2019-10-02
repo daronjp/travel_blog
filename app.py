@@ -80,7 +80,7 @@ def add_adventure_form(id_):
             )
             db.session.add(adventure)
             db.session.commit()
-            return "Adventure added. adventure id={}".format(adventure.id)
+            return redirect(f'/trips/{id_}/adventures/{adventure.id}/locations/new')
         except Exception as e:
             return(str(e))
     return render_template("adventures/new.html", trip_id=id_)
@@ -304,7 +304,7 @@ def edit_adventure_form(id_, ida_):
             adventure.published=published
             adventure.summary=summary
             db.session.commit()
-            return "Adventure modified. trip id={}".format(adventure.id)
+            return redirect(f'/trips/{id_}/adventures/{adventure.id}')
         except Exception as e:
             return(str(e))
     else:
