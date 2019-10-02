@@ -26,23 +26,27 @@
       </div>
     {% endif %}
     <div class="row my-4">
-      <div class="col-8">
+      <div class="col-12">
           <img src={{trip['photo_url']}} class="img-fluid">
       </div>
-      <div class="col-4"></div>
     </div>
     {% for adventure in adventures %}
       <div class="row my-2">
-        <div class="col-8">
-          <h6>
-            {{adventure['published']}} - <a href='{{trip['id']}}/adventures/{{adventure['id']}}'>{{adventure['name']}}</a>
+        <div class="col-12">
+            {{adventure['published']}} -
+          <a href='{{trip['id']}}/adventures/{{adventure['id']}}'>{{adventure['name']}}</a>
             {% if current_user.is_authenticated %}
               <a href='{{trip['id']}}/adventures/{{adventure['id']}}/edit'>Edit</a>
             {% endif %}
-          </h6>
         </div>
-        <div class="col-4"></div>
       </div>
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-11">
+          <i>{{adventure['summary']}}</i>
+        </div>
+      </div>
+      <hr/>
     {% endfor %}
   </div>
 
