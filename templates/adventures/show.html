@@ -10,54 +10,92 @@
 
 <body>
 <div class="container">
-  <div class="row">
-    <div class="col-12">
+  <div class="row my-2">
+    <div class="col-12 col-lg-2"></div>
+    <div class="col-12 col-lg-10">
+      {% if previous_adventure_id %}
+        <a href='/trips/{{trip_id}}/adventures/{{previous_adventure_id}}'><< Previous day</a> |
+      {% endif %}
       <a href='../../../trips/{{trip_id}}'>Back to {{trip['name']}}</a>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-11">
-      <h1>{{adventure['name']}}</h1>
-    </div>
-    <div class="col-1">
-      {% if current_user.is_authenticated %}
-        <a href='/trips/{{trip['id']}}/adventures/{{adventure['id']}}/locations/new'>New Location</a><br>
+      {% if next_adventure_id %}
+        | <a href='/trips/{{trip_id}}/adventures/{{next_adventure_id}}'>Next day >></a>
       {% endif %}
     </div>
   </div>
-{% for location in locations %}
-    <div class="row">
-      <div class="col-10">
-        <h4>{{location['visit_time']}} - {{location['name']}}</h4>
-      </div>
-      <div class="col-2">
-        {% if current_user.is_authenticated %}
-          <a href='/trips/{{trip['id']}}/adventures/{{adventure['id']}}/locations/{{location['id']}}/edit'>Edit</a>
-          <a href='/trips/{{trip['id']}}/adventures/{{adventure['id']}}/locations/{{location['id']}}/photos/new'>Add photo</a>
-        {% endif %}
-      </div>
+  <div class="row">
+    <div class="col-12 col-lg-2"></div>
+    <div class="col-12 col-lg-8">
+      <h1>{{adventure['name']}}</h1>
     </div>
+    <div class="col-12 col-lg-2"></div>
+  </div>
+  {% if current_user.is_authenticated %}
+    <div class="row">
+      <div class="col-12 col-lg-2"></div>
+      <div class="col-12 col-lg-10">
+          <a href='/trips/{{trip['id']}}/adventures/{{adventure['id']}}/locations/new'>New Location</a>
+      </div>
+      <div class="col-12 col-lg-2"></div>
+    </div>
+  {% endif %}
+{% for location in locations %}
+    <div class="row mt-1">
+      <div class="col-12 col-lg-2"></div>
+      <div class="col-12 col-lg-8">
+        <h4>{{location['visit_time']}} | {{location['name']}}</h4>
+      </div>
+      <div class="col-12 col-lg-2"></div>
+    </div>
+    {% if current_user.is_authenticated %}
+      <div class="row">
+        <div class="col-12 col-lg-2"></div>
+        <div class="col-12 col-lg-10">
+          <a href='/trips/{{trip['id']}}/adventures/{{adventure['id']}}/locations/{{location['id']}}/edit'>Edit</a> |
+          <a href='/trips/{{trip['id']}}/adventures/{{adventure['id']}}/locations/{{location['id']}}/photos/new'>Add photo</a>
+        </div>
+        <div class="col-12 col-lg-2"></div>
+      </div>
+    {% endif %}
     <div class="row mb-4">
-      <div class="col-12">
+      <div class="col-12 col-lg-2"></div>
+      <div class="col-12 col-lg-8">
           <i>{{location['summary']}}</i>
       </div>
+      <div class="col-12 col-lg-2"></div>
     </div>
     {% for photo in location['photos'] %}
       <div class="row">
-        <div class="col-12">
+        <div class="col-12 col-lg-2"></div>
+        <div class="col-12 col-lg-8">
           <img src='{{photo['photo_url']}}', class="img-fluid">
         </div>
+        <div class="col-12 col-lg-2"></div>
       </div>
-      <div class="row mb-4 mt-2">
-        <div class="col-12">
+      <div class="row mb-5 mt-2">
+        <div class="col-12 col-lg-2"></div>
+        <div class="col-12 col-lg-8">
           {{photo['subtitle']}}
         </div>
+        <div class="col-12 col-lg-2"></div>
       </div>
         {% if current_user.is_authenticated %}
-          <a href="/trips/{{trip['id']}}/adventures/{{adventure['id']}}/locations/{{location['id']}}/photos/{{photo['photo_id']}}/edit">Edit photo</a>
+          <div class="row mb-5">
+            <div class="col-12 col-lg-2"></div>
+            <div class="col-12 col-lg-8">
+              <a href="/trips/{{trip['id']}}/adventures/{{adventure['id']}}/locations/{{location['id']}}/photos/{{photo['photo_id']}}/edit">Edit photo</a>
+            </div>
+            <div class="col-12 col-lg-2"></div>
+          </div>
+
         {% endif %}
     {% endfor %}
-    <hr/ class="my-3">
+    <div class="row">
+      <div class="col-12 col-lg-2"></div>
+      <div class="col-12 col-lg-8">
+        <hr/ class="my-3">
+      </div>
+      <div class="col-12 col-lg-2"></div>
+    </div>
 {% endfor %}
 </div>
 </body>

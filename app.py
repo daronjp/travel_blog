@@ -351,6 +351,20 @@ def get_adventure(id_, ida_):
         trip = trip.__dict__
         adventure=Adventure.query.filter_by(id=ida_).first()
         adventure=adventure.__dict__
+
+        adventures = Adventure.query.filter_by(trip_id=id_).order_by(Adventure.published.asc())
+        adventures = [x.serialize() for x in adventures]
+        adventure_ids = []
+        for a in adventures:
+            adventure_ids.append(a['id'])
+        adventure_seq = adventure_ids.index(int(ida_))
+        previous_adventure_id = None
+        next_adventure_id = None
+        if adventure_seq > 0:
+            previous_adventure_id = adventure_ids[adventure_seq - 1]
+        if adventure_seq + 1 < len(adventure_ids):
+            next_adventure_id = adventure_ids[adventure_seq + 1]
+
         locations=(Location.query
                            .filter_by(adventure_id=ida_)
                            .order_by(Location.visit_time.asc()))
@@ -378,7 +392,9 @@ def get_adventure(id_, ida_):
                     locations[ix]['photos'].append({'subtitle': subtitle,
                                                     'photo_url': photo_url,
                                                     'photo_id': photo_id})
-        return render_template("adventures/show.html", trip_id=id_, trip=trip, adventure=adventure, locations=locations, photos=loc_photos)#jsonify(trip.serialize())#, jsonify([e.serialize() for e in adventure])
+        return render_template("adventures/show.html", trip_id=id_, trip=trip, adventure=adventure,
+                               locations=locations, photos=loc_photos, next_adventure_id=next_adventure_id,
+                               previous_adventure_id=previous_adventure_id)
     except Exception as e:
 	    return(str(e))
 
@@ -416,5 +432,5 @@ def user_login_form():
             return 'wrong'
         else:
             login_user(user)
-            return redirect('/admin')
+            return redirect('/trips')
     return render_template("/admin/users/new.html")
