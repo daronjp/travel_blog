@@ -79,6 +79,8 @@
           </div>
           <div class="col-12 col-lg-2"></div>
         </div>
+      {% else %}
+        <div class="row my-2"></div>
       {% endif %}
       {% if current_user.is_authenticated %}
         <div class="row mb-5">
@@ -110,8 +112,12 @@
       {% endif %}
     </div>
   </div>
-  <div class="row my-5"></div>
-  <div class="row my-5"></div>
+  <div class="row my-5">
+    <div class="col-12"><p></div>
+  </div>
+  <div class="row my-5">
+    <div class="col-12"><p></div>
+  </div>
 </div>
 </body>
 </html>
