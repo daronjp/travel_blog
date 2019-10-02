@@ -10,18 +10,17 @@
 <!-- <img src={{photo}}> -->
   {% if current_user.is_authenticated %}
   <div class="row">
-    <div class="col-8">
+    <div class="col-12">
       <a href='/trips/new'>New Trip</a>
     </div>
-    <div class="col-4"></div>
   </div>
   {% endif %}
   {% for trip in trips %}
     <div class="row">
-      <div class="col-8">
+      <div class="col-11">
         <a href='/trips/{{trip['id']}}'><h4>{{trip['published']}} - {{trip['name']}}</h4></a>
       </div>
-      <div class="col-4">
+      <div class="col-1">
         {% if current_user.is_authenticated %}
           <a href='/trips/{{trip['id']}}/edit'>Edit</a>
         {% endif %}
@@ -29,10 +28,9 @@
     </div>
         {% if trip['photo_url'] %}
           <div class="row">
-            <div class="col-8">
+            <div class="col-12">
                 <img src={{trip['photo_url']}} class="img-fluid">
             </div>
-            <div class="col-4"></div>
           </div>
         {% endif %}
     <hr/  >

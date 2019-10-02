@@ -11,16 +11,15 @@
 <body>
 <div class="container">
   <div class="row">
-    <div class="col-8">
+    <div class="col-12">
       <a href='../../../trips/{{trip_id}}'>Back to {{trip['name']}}</a>
     </div>
-    <div class="col-4"></div>
   </div>
   <div class="row">
-    <div class="col-8">
+    <div class="col-11">
       <h1>{{adventure['name']}}</h1>
     </div>
-    <div class="col-4">
+    <div class="col-1">
       {% if current_user.is_authenticated %}
         <a href='/trips/{{trip['id']}}/adventures/{{adventure['id']}}/locations/new'>New Location</a><br>
       {% endif %}
@@ -28,10 +27,10 @@
   </div>
 {% for location in locations %}
     <div class="row">
-      <div class="col-8">
+      <div class="col-10">
         <h4>{{location['visit_time']}} - {{location['name']}}</h4>
       </div>
-      <div class="col-4">
+      <div class="col-2">
         {% if current_user.is_authenticated %}
           <a href='/trips/{{trip['id']}}/adventures/{{adventure['id']}}/locations/{{location['id']}}/edit'>Edit</a>
           <a href='/trips/{{trip['id']}}/adventures/{{adventure['id']}}/locations/{{location['id']}}/photos/new'>Add photo</a>
@@ -39,24 +38,20 @@
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-8">
+      <div class="col-12">
           <i>{{location['summary']}}</i>
       </div>
-      <div class="col-4"></div>
     </div>
     {% for photo in location['photos'] %}
       <div class="row">
-        <div class="col-8">
+        <div class="col-12">
           <img src='{{photo['photo_url']}}', class="img-fluid">
-        </div>
-        <div class=col-4>
         </div>
       </div>
       <div class="row mb-4 mt-2">
-        <div class="col-8">
+        <div class="col-12">
           {{photo['subtitle']}}
         </div>
-        <div class="col-4"></div>
       </div>
         {% if current_user.is_authenticated %}
           <a href="/trips/{{trip['id']}}/adventures/{{adventure['id']}}/locations/{{location['id']}}/photos/{{photo['photo_id']}}/edit">Edit photo</a>
