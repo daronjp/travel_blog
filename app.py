@@ -371,7 +371,7 @@ def get_adventure(id_, ida_):
         locations = [x.serialize() for x in locations]
         photos = (db.session.query(Photo)
                             .join(Location, Photo.location_id==Location.id)
-                            .orderby(Photo.id.asc())
+                            .order_by(Photo.id.asc())
                             .all())
         photos = [x.serialize() for x in photos]
         loc_photos = {}
