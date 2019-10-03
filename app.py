@@ -43,29 +43,10 @@ def download_image(s3, resource):
                                     'Key': resource}, ExpiresIn = 100)
     return url
 
-# @app.route("/")
-# def hello():
-#     return "Hello World!"
-
-# @app.route("/trips/new")
-# def new_trip():
-#     name=request.args.get('name')
-#     photo_url=request.args.get('photo_url')
-#     published=request.args.get('published')
-#     try:
-#         trip=Trip(
-#             name=name,
-#             photo_url=photo_url,
-#             published=published
-#         )
-#         db.session.add(trip)
-#         db.session.commit()
-#         return "Book added. book id={}".format(trip.id)
-#     except Exception as e:
-# 	    return(str(e))
-
 @app.route("/trips/<id_>/adventures/new",methods=['GET', 'POST'])
 def add_adventure_form(id_):
+    if not current_user.is_authenticated:
+        return redirect('/trips')
     if request.method == 'POST':
         name=request.form.get('name')
         summary=request.form.get('summary')
@@ -87,6 +68,8 @@ def add_adventure_form(id_):
 
 @app.route("/trips/<id_>/adventures/<ida_>/locations/new",methods=['GET', 'POST'])
 def add_location_form(id_, ida_):
+    if not current_user.is_authenticated:
+        return redirect('/trips')
     if request.method == 'POST':
         name=request.form.get('name')
         summary=request.form.get('summary')
@@ -173,6 +156,8 @@ def name_photo(user_file, photo_url, id_, ida_, idl_):
 
 @app.route("/trips/<id_>/adventures/<ida_>/locations/<idl_>/photos/new",methods=['GET', 'POST'])
 def add_photo_form(id_, ida_, idl_):
+    if not current_user.is_authenticated:
+        return redirect('/trips')
     location = Location.query.filter_by(id=idl_).first()
     location = location.__dict__
     if request.method == 'POST':
@@ -187,6 +172,8 @@ def delete_photo(photo_url):
 
 @app.route("/trips/<id_>/adventures/<ida_>/locations/<idl_>/photos/<idp_>/edit", methods=['GET', 'POST'])
 def edit_photo_form(id_, ida_, idl_, idp_):
+    if not current_user.is_authenticated:
+        return redirect('/trips')
     if request.method == 'POST':
         photo_url=request.form.get('photo_url')
         subtitle=request.form.get('subtitle')
@@ -219,6 +206,8 @@ def edit_photo_form(id_, ida_, idl_, idp_):
 
 @app.route("/trips/new",methods=['GET', 'POST'])
 def add_trip_form():
+    if not current_user.is_authenticated:
+        return redirect('/trips')
     if request.method == 'POST':
         name=request.form.get('name')
         photo_url=request.form.get('photo_url')
@@ -238,6 +227,8 @@ def add_trip_form():
 
 @app.route("/trips/<id_>/edit", methods=['GET', 'POST'])
 def edit_trip_form(id_):
+    if not current_user.is_authenticated:
+        return redirect('/trips')
     if request.method == 'POST':
         name=request.form.get('name')
         published=request.form.get('published')
@@ -294,6 +285,8 @@ def get_by_id(id_):
 
 @app.route("/trips/<id_>/adventures/<ida_>/edit", methods=['GET', 'POST'])
 def edit_adventure_form(id_, ida_):
+    if not current_user.is_authenticated:
+        return redirect('/trips')
     if request.method == 'POST':
         name=request.form.get('name')
         summary=request.form.get('summary')
@@ -320,6 +313,8 @@ def edit_adventure_form(id_, ida_):
 
 @app.route("/trips/<id_>/adventures/<ida_>/locations/<idl_>/edit", methods=['GET', 'POST'])
 def edit_location_form(id_, ida_, idl_):
+    if not current_user.is_authenticated:
+        return redirect('/trips')
     if request.method == 'POST':
         name=request.form.get('name')
         summary=request.form.get('summary')
