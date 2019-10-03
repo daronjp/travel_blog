@@ -202,11 +202,11 @@ def edit_photo_form(id_, ida_, idl_, idp_):
             photo.photo_url=photo_url
             photo.subtitle=subtitle
             db.session.commit()
-            return "Photo modified. photo id={}".format(photo.id)
+            return redirect(f'/trips/{id_}/adventures/{ida_}')
         else:
             photo.subtitle=subtitle
             db.session.commit()
-            return "Photo modified just summery. photo id={}".format(photo.id)
+            return redirect(f'/trips/{id_}/adventures/{ida_}')
     else:
         try:
             photo=Photo.query.filter_by(id=idp_).first()
@@ -371,6 +371,7 @@ def get_adventure(id_, ida_):
         locations = [x.serialize() for x in locations]
         photos = (db.session.query(Photo)
                             .join(Location, Photo.location_id==Location.id)
+                            .orderby(Photo.id.asc())
                             .all())
         photos = [x.serialize() for x in photos]
         loc_photos = {}
