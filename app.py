@@ -1,5 +1,6 @@
 import os
 import time
+import sys
 
 from flask import Flask, request, jsonify, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
@@ -119,7 +120,6 @@ def upload_photo(request, id_, ida_, idl_, edit=False):
     location_id=request.form.get('location_id')
     user_file=request.files["user_file"]
     photo_url = name_photo(user_file, request.form.get('photo_url'), id_, ida_, idl_)
-
     image=Image.open(user_file)
     format = image.format
     in_mem_file = io.BytesIO()
@@ -175,7 +175,6 @@ def edit_photo_form(id_, ida_, idl_, idp_):
     if not current_user.is_authenticated:
         return redirect('/trips')
     if request.method == 'POST':
-        photo_url=request.form.get('photo_url')
         subtitle=request.form.get('subtitle')
         user_file = request.files['user_file']
         user_file.seek(0, os.SEEK_END)
@@ -184,9 +183,9 @@ def edit_photo_form(id_, ida_, idl_, idp_):
             file_attached = False
         photo=Photo.query.filter_by(id=idp_).first()
         if file_attached:
-            photo_url = upload_photo(request, id_, ida_, idl_)
+            purl = upload_photo(request, id_, ida_, idl_, edit=True)
             delete_photo(photo.photo_url)
-            photo.photo_url=photo_url
+            photo.photo_url=purl
             photo.subtitle=subtitle
             db.session.commit()
             return redirect(f'/trips/{id_}/adventures/{ida_}')
